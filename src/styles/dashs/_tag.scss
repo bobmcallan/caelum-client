@@ -1,0 +1,58 @@
+@use "variables.scss" as *;
+
+.el-tag-group {
+    display: flex;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    .el-tag {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        &.el-tag--large {
+            font-size: 1.2em;
+        }
+
+        &:first-of-type {
+            font-weight: 500;
+            text-transform: uppercase;
+            border-right: none;
+        }
+
+        &:last-of-type {
+            // border-top-left-radius: 0;
+            // border-bottom-left-radius: 0;
+            width: 150px;
+            border-left: none;
+        }
+
+        &.is-expanded {
+            justify-content: center;
+            flex: 1 1 auto;
+            display: inline-flex;
+        }
+
+        &.is-light {
+            background-color: whitesmoke;
+        }
+
+        &.is-success {
+            border-color: $green;
+            background-color: $green;
+            color: $white;
+        }
+
+        &.is-warning {
+            background-color: $yellow;
+            // color: $white;
+        }
+
+        &.is-error {
+            background-color: $red;
+            color: $white;
+        }
+    }
+}

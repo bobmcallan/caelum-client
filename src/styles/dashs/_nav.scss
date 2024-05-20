@@ -1,0 +1,24 @@
+@use "variables.scss" as *;
+
+nav {
+    div.level-left {
+        .el-link:not(:first-child) {
+            padding-left: 10px;
+        }
+    }
+
+    div.level-right {
+        .el-link:not(:last-child) {
+            padding-right: 100px;
+        }
+    }
+
+    &.has-top-border {
+        border-top: 1px solid $ltgrey;
+    }
+
+    &.has-bottom-border {
+        padding-bottom: 5px;
+        border-bottom: 1px solid $ltgrey;
+    }
+}

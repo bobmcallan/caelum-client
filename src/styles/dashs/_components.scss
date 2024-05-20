@@ -1,0 +1,27 @@
+@use "variables.scss" as *;
+
+div.heading-right-content {
+    float: right;
+
+    .columns {
+        .column {
+            margin-bottom: 0px;
+            padding-top: 0.05rem;
+            padding-right: 0.25rem;
+            padding-bottom: 0.05rem;
+            padding-left: 0.25rem;
+        }
+
+        .column:first-child {
+            min-width: 200px;
+            text-align: right;
+            color: $dashsblue;
+            /* background-color: aqua; */
+        }
+
+        .column:not(:first-child) {
+            overflow-wrap: break-word;
+            max-width: 800px;
+        }
+    }
+}

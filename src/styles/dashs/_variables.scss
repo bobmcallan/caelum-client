@@ -1,0 +1,300 @@
+@use "sass:math";
+@use "sass:map";
+
+// screen
+$gap: 32px;
+$tablet: 769px;
+$desktop: 960px+ (2 * $gap);
+$widescreen: 1152px+ (2 * $gap);
+$widescreen-enabled: true;
+
+// Custom Colors
+$red: hsl(348, 100%, 40%) !default;
+$cyan: hsl(204, 86%, 53%) !default;
+$green: hsl(121, 38%, 59%) !default;
+$yellow: hsl(50, 100%, 65%) !default;
+$grey: rgba(45, 45, 45, 0.7) !default;
+$orange: hsl(33, 100%, 50%) !default;
+
+$red-darker: #da1a32;
+$dkred: $red-darker;
+$softred: #da5b45;
+$dkblue: #565656;
+$dkgrey: #202020;
+$ltgrey: #ebeef5;
+$white: #fff !default;
+$black: #000 !default;
+
+$dashsblue: steelblue;
+$dashsgreen: hsl(141, 53%, 31%);
+$primary: $dashsblue;
+$link: $primary;
+$success: $dashsgreen;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+
+// font family
+// Element
+$font-family: Ubuntu, RobotoDraft, Helvetica, Arial, sans-serif;
+
+// Bulma
+$family-sans-serif: $font-family;
+
+// font-size
+$body-size: 0.875em !default;
+
+// Background Color
+$background: hsl(0, 0%, 95%);
+
+// Breakpoints
+$mobile: 411px;
+
+$speed-slow: 150ms !default;
+$speed-slower: 250ms !default;
+
+// Element Colors
+$--colors: (
+    "primary": (
+        "base": $dashsblue
+    ),
+    "success": (
+        "base": $dashsgreen
+    ),
+    "warning": (
+        "base": #f2711c
+    ),
+    "danger": (
+        "base": #db2828
+    ),
+    "error": (
+        "base": #db2828
+    ),
+    "info": (
+        "base": #909399
+    )
+);
+
+// Color List
+$--namedcolors: (
+    "primary": $dashsblue,
+    "success": $dashsgreen,
+    "warning": #f2711c,
+    "danger": #db2828,
+    "error": #db2828,
+    "info": #909399,
+    "default": $ltgrey,
+    "transparent": transparent,
+    "dkblue": $dkblue,
+    "dkred": $dkred,
+    "dkgrey": $dkgrey,
+    "ltgrey": $ltgrey,
+    "white": $white,
+    "black": $black,
+    "pink": pink
+);
+
+// @forward "element-plus/theme-chalk/src/common/var.scss" with (
+//     // Override with customer Colors
+//     $colors: $--colors
+// );
+
+// Create color variables
+:root {
+    @each $name, $color in $--namedcolors {
+        --color-#{$name}: #{$color};
+        --el-color-#{$name}: #{$color};
+    }
+}
+
+@import "bulma/bulma";
+
+// Bluma Overrides
+$box-shadow:
+    0 0.1em 0 -0.125em $ltgrey,
+    0 0px 0 1px $ltgrey;
+
+// SASS Styles
+@for $i from 1 through 10 {
+    .is-padded-#{$i} {
+        padding: 1px * $i;
+    }
+
+    .is-padding-#{$i} {
+        padding: 1px * $i;
+    }
+
+    .is-padded-right-#{$i} {
+        padding-right: 1px * $i;
+    }
+
+    .is-padding-right-#{$i} {
+        padding-right: 1px * $i;
+    }
+
+    .is-padded-left-#{$i} {
+        padding-left: 1px * $i;
+    }
+
+    .is-padding-left-#{$i} {
+        padding-left: 1px * $i;
+    }
+
+    .is-padded-top-#{$i} {
+        padding-top: 1px * $i;
+    }
+
+    .is-padding-top-#{$i} {
+        padding-top: 1px * $i;
+    }
+
+    .is-padded-bottom-#{$i} {
+        padding-bottom: 1px * $i;
+    }
+
+    .is-padding-bottom-#{$i} {
+        padding-bottom: 1px * $i;
+    }
+}
+
+// Backgrounds & Colors
+@each $name, $color in $--namedcolors {
+    .is-background-#{$name} {
+        background-color: $color;
+    }
+
+    .--#{$name}-color {
+        color: $color;
+    }
+
+    .--#{$name}-color-soft {
+        color: desaturate($color, 50%);
+    }
+
+    .--#{$name}-color-light {
+        color: lighten($color, 20%);
+
+        span {
+            color: lighten($color, 20%);
+        }
+    }
+}
+
+// Buttons / Icons
+@each $name, $color in $--namedcolors {
+    .--#{$name}-button-text {
+        color: lighten($color, 20%);
+
+        &.el-button,
+        span,
+        svg {
+            color: lighten($color, 20%) !important;
+        }
+    }
+
+    .--#{$name}-icon-color {
+        color: lighten($color, 20%);
+
+        svg {
+            color: lighten($color, 20%) !important;
+        }
+    }
+}
+
+// Borders
+$--edges: ("left", "right", "top", "bottom");
+
+@each $edge in $--edges {
+    @each $name, $color in $--namedcolors {
+        .is-border-#{$edge}-#{$name} {
+            border-#{$edge}-color: $color;
+            border-#{$edge}-style: solid;
+            border-#{$edge}-width: thin;
+        }
+    }
+}
+
+@for $i from 1 through 4 {
+    h#{5 - $i} {
+        font-size: 1em * $i;
+
+        &.is-centered {
+            justify-content: center;
+            text-align: center;
+        }
+    }
+}
+
+// Named Font Sizes
+$--font-sizes-named: (
+    x-small: x-small,
+    smaller: smaller,
+    small: small,
+    large: large,
+    larger: larger,
+    x-large: x-large
+);
+
+:root {
+    @each $key, $value in $--font-sizes-named {
+        --font-size-#{$key}: #{$value};
+    }
+
+    @for $i from 1 through 20 {
+        --font-size-#{$i}-em: #{$i * 0.1}em;
+    }
+
+    @for $i from 1 through 20 {
+        --font-size-#{$i}-px: #{$i}px;
+    }
+}
+
+@each $element, $size in $--font-sizes-named {
+    .font-size-#{$element} {
+        font-size: $size;
+        line-height: 24px;
+    }
+}
+
+@for $i from 1 through 20 {
+    .font-size-#{$i}-em {
+        font-size: #{$i * 0.1}em;
+    }
+
+    .font-size-#{$i}-px {
+        font-size: #{$i}px;
+    }
+}
+
+@for $i from 1 through 20 {
+    .font-weight-#{$i * 100} {
+        font-weight: $i * 100;
+    }
+}
+
+$--sizes: (
+    "zero": 0rem,
+    "quarter": 0.25rem,
+    "half": 0.5rem,
+    "one": 1rem,
+    "two": 2rem,
+    "five": 5rem
+);
+
+hr {
+    @each $element, $size in $--sizes {
+        &.is-#{$element} {
+            margin-top: $size;
+            margin-bottom: $size;
+        }
+    }
+
+    @each $color-name, $color-value in $--namedcolors {
+        &.is-#{$color-name} {
+            background-color: $color-value !important;
+            height: 1px;
+            border: none;
+            display: block;
+        }
+    }
+} ;;

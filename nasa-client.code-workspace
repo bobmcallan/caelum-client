@@ -1,0 +1,16 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "src"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.cwd": "C:\\development\\procul\\procul-client",
+        "terminal.integrated.env.windows": {
+            "PATH": "C:\\development\\go;C:\\development\\go\\bin;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe;C:\\development\\git;C:\\development\\git\\bin;C:\\development\\node-v18.18.2-win-x64;C:\\development\\node-v18.18.2-win-x64\\node_modules\\npm\\bin",
+        },
+    }
+}

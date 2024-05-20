@@ -1,0 +1,45 @@
+.app-container {
+
+	@media only screen and (max-width: 1024px) {
+		margin-left: 10px;
+		margin-right: 10px;
+		// background-color: red;
+	}
+
+	@media only screen and (min-width: 1024px) and (max-width: 1408px) {
+		margin-left: 50px;
+		margin-right: 50px;
+		// background-color: green;
+	}
+
+	@media only screen and (min-width: 1408px) {
+		margin-left: 100px;
+		margin-right: 100px;
+		// background-color: blue;
+	}
+
+	#header {
+
+		.navbar {
+
+			@media only screen and (max-width: 1024px) {
+				padding-left: 10px;
+				padding-right: 10px;
+				// background-color: red;
+			}
+
+			@media only screen and (min-width: 1024px) and (max-width: 1408px) {
+				padding-left: 100px;
+				padding-right: 100px;
+				// background-color: green;
+			}
+
+			@media only screen and (min-width: 1408px) {
+				padding-left: 200px;
+				padding-right: 200px;
+				// background-color: blue;
+			}
+
+		}
+	}
+}

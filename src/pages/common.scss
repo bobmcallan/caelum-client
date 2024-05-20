@@ -1,0 +1,205 @@
+.header-dimension {
+    .cell {
+        color: darkblue;
+        text-transform: uppercase;
+    }
+}
+
+.measures {
+    td {
+        // font-size: smaller;
+    }
+}
+
+.checkbox-group-dark {
+    .is-checked {
+        .el-checkbox-button__inner {
+            border-color: var(--el-color-black);
+            background-color: var(--el-color-black);
+            box-shadow: -1px 0 0 0 var(--el-color-black, var(--el-color-black));
+        }
+
+        &:first-child {
+            .el-checkbox-button__inner {
+                border-left-color: var(--el-color-black);
+            }
+        }
+    }
+}
+
+.checkbox-group-success,
+.checkbox-group-green {
+    .is-checked {
+        .el-checkbox-button__inner {
+            border-color: var(--el-color-success);
+            background-color: var(--el-color-success);
+            box-shadow: -1px 0 0 0 var(--el-color-success, var(--el-color-success));
+        }
+
+        &:first-child {
+            .el-checkbox-button__inner {
+                border-left-color: var(--el-color-success);
+            }
+        }
+    }
+}
+
+.checkbox-group-danger,
+.checkbox-group-red {
+    .is-checked {
+        .el-checkbox-button__inner {
+            border-color: var(--el-color-danger);
+            background-color: var(--el-color-danger);
+            box-shadow: -1px 0 0 0 var(--el-color-danger, var(--el-color-danger));
+        }
+
+        &:first-child {
+            .el-checkbox-button__inner {
+                border-left-color: var(--el-color-danger);
+            }
+        }
+    }
+}
+
+.checkbox-group-info,
+.checkbox-group-blue {
+    // .el-checkbox-button {
+    //     .el-checkbox-button__inner {
+    //         background-color: var(--color-pink);
+    //     }
+    // }
+    .is-checked {
+        .el-checkbox-button__inner {
+            border-color: var(dashsblue);
+            background-color: var(dashsblue);
+            box-shadow: -1px 0 0 0 var(dashsblue, var(dashsblue));
+        }
+    }
+}
+
+.radio-group-success {
+    .is-active {
+        .el-radio-button__inner {
+            border-color: var(--el-color-success);
+            background-color: var(--el-color-success);
+            box-shadow: -1px 0 0 0 var(--el-color-success, var(--el-color-success));
+        }
+    }
+}
+
+.radio-group-warn {
+    .is-active {
+        .el-radio-button__inner {
+            border-color: var(--el-color-danger);
+            background-color: var(--el-color-danger);
+            box-shadow: -1px 0 0 0 var(--el-color-danger, var(--el-color-danger));
+        }
+    }
+}
+
+.radio-group-info {
+    .is-active {
+        .el-radio-button__inner {
+            border-color: var(--el-color-info);
+            background-color: var(--el-color-info);
+            box-shadow: -1px 0 0 0 var(--el-color-info, var(--el-color-info));
+        }
+    }
+}
+
+.options-selection {
+    .is-checked,
+    .is-checked:first-child,
+    .is-focus {
+        .el-checkbox-button__inner {
+            border-color: var(--el-color-info);
+        }
+    }
+
+    .is-checked {
+        .el-checkbox-button__inner {
+            background-color: var(--el-color-info);
+        }
+    }
+}
+
+.el-space--horizontal {
+    span {
+        @extend .font-size-8-em !optional;
+        @extend .font-weight-400 !optional;
+    }
+}
+
+.el-table {
+    tr.measure-header {
+        th {
+            // border-top-width: 1px;
+            // border-top-style: solid;
+
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+
+        &.measure-header-frequency {
+            th {
+                border-color: var(--el-color-warning-light-5);
+            }
+        }
+    }
+
+    .el-table__row {
+        sub {
+            font-size: 11px;
+            line-height: normal;
+        }
+
+        &.measure-row {
+            td:first-child {
+                border-left-width: 5px;
+                border-left-style: solid;
+            }
+
+            &.measure-name-recency {
+                td:first-child {
+                    border-left-color: var(--el-color-danger-light-5);
+                }
+            }
+
+            &.measure-name-monetary {
+                td:first-child {
+                    border-left-color: var(--el-color-info-light-5);
+                }
+            }
+
+            &.measure-name-frequency {
+                td:first-child {
+                    border-left-color: var(--el-color-warning-light-5);
+                }
+            }
+
+            &.measure-name-aov {
+                td:first-child {
+                    border-left-color: var(--el-color-success-light-5);
+                }
+            }
+
+            &.measure-name-transactions {
+                td:first-child {
+                    border-left-color: var(--el-color-info-light-5);
+                }
+            }
+
+            &.measure-name-acquisition {
+                td:first-child {
+                    border-left-color: var(--el-color-success-light-8);
+                }
+            }
+
+            &.measure-name-spend {
+                td:first-child {
+                    border-left-color: var(--el-color-warning-light-8);
+                }
+            }
+        }
+    }
+}

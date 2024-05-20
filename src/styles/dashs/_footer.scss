@@ -1,0 +1,43 @@
+@use "variables.scss" as *;
+
+.footer {
+    color: $grey;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    padding-top: 0.5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
+
+    p,
+    sub {
+        display: flex;
+        flex-direction: row;
+    }
+
+    p:before,
+    p:after,
+    sub:before,
+    sub:after {
+        content: "";
+        flex: 1 1;
+        margin: auto;
+    }
+
+    p:before,
+    p:after {
+        border-bottom: 1px solid;
+    }
+
+    p:before,
+    sub:before {
+        margin-right: 10px;
+    }
+
+    p:after,
+    sub:after {
+        margin-left: 10px;
+    }
+}

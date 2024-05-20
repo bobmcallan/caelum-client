@@ -1,0 +1,29 @@
+button {
+	&.is-right {
+		float: right;
+	}
+
+	&.is-static {
+		background-color: whitesmoke;
+		border-color: #e6e6e6;
+		color: rgba(45, 45, 45, 0.7);
+		box-shadow: none;
+		pointer-events: none !important;
+	}
+
+	&.el-button {
+
+		svg {
+			padding-bottom: 0px;
+		}
+
+		&.is-loading {
+
+			span {
+				margin-left: 0px
+			}
+
+		}
+	}
+
+}

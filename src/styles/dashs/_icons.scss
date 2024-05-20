@@ -1,0 +1,47 @@
+@use "variables" as *;
+
+i.is-medium {
+    font-size: 1.5rem;
+}
+
+.column {
+    &.is-icons {
+        padding: 0px;
+        font-size: 12px;
+    }
+}
+
+.el-button {
+    svg {
+        font-weight: bolder;
+        font-size: 20px;
+        vertical-align: top;
+        width: 1em;
+        height: 1em;
+        padding-bottom: 3px;
+    }
+
+    &.el-button--primary {
+        svg {
+            color: $primary;
+        }
+    }
+
+    &.el-button--success {
+        svg {
+            color: $success;
+        }
+    }
+
+    &.el-button--warning {
+        svg {
+            color: $warning;
+        }
+    }
+}
+
+.el-icon {
+    &.is-loading-red {
+        color: red;
+    }
+}

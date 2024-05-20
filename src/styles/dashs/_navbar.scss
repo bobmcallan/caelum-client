@@ -1,0 +1,38 @@
+@use "variables.scss" as *;
+
+.navbar {
+    .heading-sub {
+        font-size: large;
+        color: $orange;
+        top: -11px;
+        left: 2px;
+        position: relative;
+        text-transform: lowercase;
+    }
+
+    .navbar-menu {
+        a.navbar-item {
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: transparent !important;
+                color: $dashsblue;
+            }
+
+            &.active {
+                color: $dashsblue;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .navbar-end {
+        @media only screen and (max-width: $widescreen) {
+            .navbar-item {
+                div.navbar-item {
+                    padding-left: 0.75rem;
+                }
+            }
+        }
+    }
+}

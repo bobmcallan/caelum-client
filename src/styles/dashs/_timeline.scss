@@ -1,0 +1,37 @@
+@use "variables.scss" as *;
+
+ul.el-timeline {
+    .el-timeline-item__timestamp {
+        font-weight: 500;
+        font-size: inherit;
+        padding-top: 2px;
+        text-transform: uppercase;
+        color: $dkred;
+    }
+
+    .el-card {
+        .el-card__body {
+            padding-top: 0;
+            padding-left: 0;
+        }
+        ul {
+            li {
+                &.is-heading {
+                    padding-top: 6px;
+                    font-weight: 500;
+                    list-style-type: none;
+                    margin-left: inherit;
+                    // text-transform: uppercase;
+                    color: $primary;
+                }
+                &.is-subheading {
+                    font-weight: 500;
+                }
+
+                margin-left: 1.4rem;
+                list-style-type: circle;
+                color: $grey;
+            }
+        }
+    }
+}

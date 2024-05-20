@@ -1,0 +1,41 @@
+ul.el-menu {
+
+    border-right: none;
+
+    div.el-sub-menu__title {
+        font-weight: 600;
+
+    }
+
+    // .el-sub-menu.is-opened > .el-sub-menu__title .el-sub-menu__icon-arrow
+
+    /*
+    li.el-menu-item {
+        padding-left: 50px !important;
+
+    }
+    */
+
+    li.el-sub-menu {
+        .el-menu-item {
+            min-width: auto;
+        }
+
+        /*
+        .el-sub-menu__icon-arrow {
+            padding-bottom: 5px;
+        }
+        */
+
+        &:not(.is-opened) {
+            .el-sub-menu__icon-arrow {
+                padding-top: 5px;
+            }
+        }
+
+
+    }
+
+
+
+}

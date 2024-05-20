@@ -1,0 +1,9 @@
+.columns {
+
+	&.is-right {
+		&:not(.navbar-dropdown) {
+			float: right;
+		}
+	}
+
+}

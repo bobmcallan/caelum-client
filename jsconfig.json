@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "lib": [
+            "ESNext"
+        ],
+        "allowJs": true,
+    },
+    "typescript.validate.enable": false,
+    "javascript.validate.enable": false,
+}

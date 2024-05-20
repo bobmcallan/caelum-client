@@ -1,0 +1,44 @@
+@use "variables.scss" as *;
+
+/* Colours */
+.dkred,
+i.dkred,
+.is-dkred {
+    color: $dkred;
+}
+
+.red,
+i.red,
+.is-red {
+    color: $red !important;
+}
+
+.orange,
+i.orange,
+.is-orange {
+    color: $orange;
+}
+
+.yellow,
+i.yellow,
+.is-yellow {
+    color: $yellow;
+}
+
+i.green,
+.green,
+.is-green {
+    color: $green;
+}
+
+i.grey,
+.grey,
+.is-grey {
+    color: $grey;
+}
+
+i.ltgrey,
+.ltgrey,
+.is-ltgrey {
+    color: $ltgrey;
+}
