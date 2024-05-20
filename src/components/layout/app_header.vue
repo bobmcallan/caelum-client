@@ -131,6 +131,7 @@ watch([activePageIndex], async () => {
 
 <style lang="scss">
 .flex-grow {
+
     flex-grow: 1;
 }
 
