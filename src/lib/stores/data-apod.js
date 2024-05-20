@@ -9,7 +9,6 @@ import { customAlphabet, urlAlphabet } from 'nanoid'
 import { Mutex } from 'async-mutex';
 import emitter from '@t3b/lib/vue/vue-emitter';
 
-import { factStore } from "@t3b/lib/stores/data-fact";
 import { configStore } from "@t3b/lib/stores/app-config";
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
@@ -17,17 +16,14 @@ import { toJson } from '@t3b/lib/functions/func-general';
 import '@t3b/lib/functions/func-array';
 import '@t3b/lib/functions/func-string';
 
-export const superChartStore = defineStore("data-superchart", () => {
+export const apodStore = defineStore("data-apodstore", () => {
 
     const mutex = new Mutex();
     const nanoid = customAlphabet(urlAlphabet, 5)
 
-    const factstore = factStore();
     const configstore = configStore();
 
-    const { defaultMeasure } = storeToRefs(factstore)
-
-    const _componentId = "data-superchart"
+    const _componentId = "data-apodstore"
     const _filenames = ["api/charts.json"]
     const _host = configstore.apiAddress
 
@@ -51,22 +47,6 @@ export const superChartStore = defineStore("data-superchart", () => {
             months: defaultzoom
         }
     }
-
-    // const _defaultMeasureOptions = {
-    //     value: null,
-    //     charttype: null,
-    //     stack: null,
-    //     area: null,
-    //     labels: null,
-    //     yaxis: null,
-    //     avg: null,
-    //     position: null,
-    //     datatype: null,
-    //     datacalc: null,
-    //     end: null,
-    //     scale: null,
-    //     filter: null
-    // }
 
     const _loading = ref(false)
     const _db = ref(null)

@@ -1,46 +1,46 @@
-@forward "dashs/variables";
+@forward "t3b/variables";
 
-@use "dashs/variables" as *;
+@use "t3b/variables" as *;
 
-@use "dashs/utility";
+@use "t3b/utility";
 
-@use "dashs/colors";
+@use "t3b/colors";
 
-@use "dashs/columns";
+@use "t3b/columns";
 
-@use "dashs/fonts";
+@use "t3b/fonts";
 
-@use "dashs/icons";
+@use "t3b/icons";
 
-@use "dashs/layout";
+@use "t3b/layout";
 
-@use "dashs/card";
+@use "t3b/card";
 
-@use "dashs/pagination";
+@use "t3b/pagination";
 
-@use "dashs/nav";
+@use "t3b/nav";
 
-@use "dashs/navbar";
+@use "t3b/navbar";
 
-@use "dashs/timeline";
+@use "t3b/timeline";
 
-@use "dashs/components";
+@use "t3b/components";
 
-@use "dashs/form";
+@use "t3b/form";
 
-@use "dashs/menu";
+@use "t3b/menu";
 
-@use "dashs/button";
+@use "t3b/button";
 
-@use "dashs/tag";
+@use "t3b/tag";
 
-@use "dashs/display";
+@use "t3b/display";
 
-@use "dashs/table";
+@use "t3b/table";
 
-@use "dashs/highlight";
+@use "t3b/highlight";
 
-@use "dashs/footer";
+@use "t3b/footer";
 
 * {
     box-sizing: border-box;

@@ -7,7 +7,6 @@ import { newlogger } from './vue-logger.js';
 import appHeader from '@t3b/components/layout/app_header.vue';
 import appFooter from '@t3b/components/layout/app_footer.vue';
 
-
 const logger = newlogger({ name: 'vue-router', level: ENV.LOGLEVEL });
 
 logger.info('Loading..');
@@ -19,43 +18,42 @@ const app_router = {
     linkExactActiveClass: 'exact-active',
     history: createWebHashHistory(),
     routes: [
-        { path: '/', redirect: { name: 'superchart' } },
         {
-            path: '/:index(superchart)?/:id?',
-            name: 'superchart',
+            path: '/',
+            name: 'home',
             components: {
                 header: appHeader,
-                default: () => import('@t3b/pages/superchart/index.vue'),
+                default: () => import('@t3b/pages/index.vue'),
                 footer: appFooter
             },
-            meta: { auth: false, title: 'Super Chart', icon: 'superchart' },
+            meta: { auth: false, title: 'Home', icon: 'home' },
             props: { default: true, header: true },
         },
-        // {
-        //     path: '/:index(membership)?',
-        //     name: 'membership',
-        //     components: {
-        //         header: appHeader,
-        //         default: () => import('@t3b/pages/membership/index.vue'),
-        //         footer: appFooter
-        //     },
-        //     meta: { auth: false, title: 'Membership', icon: 'membership' },
-        //     props: { header: true },
-        // },
-        // {
-        //     path: '/:index?/:division?/:purchasetype?/:scale?',
-        //     name: 'index',
-        //     components: {
-        //         header: appHeader,
-        //         default: () => import('@t3b/pages/index.vue'),
-        //         footer: appFooter
-        //     },
-        //     meta: { auth: false, title: 'Index', icon: 'index' },
-        //     props: { default: true, header: true },
-        // },
+        {
+            path: '/:index(astronomy)',
+            name: 'astronomy',
+            components: {
+                header: appHeader,
+                default: () => import('@t3b/pages/astronomy.vue'),
+                footer: appFooter
+            },
+            meta: { auth: false, title: 'Home', icon: 'home' },
+            props: { default: false, header: true },
+        },
+        {
+            path: '/:index(catalogue)',
+            name: 'catalogue',
+            components: {
+                header: appHeader,
+                default: () => import('@t3b/pages/catalogue.vue'),
+                footer: appFooter
+            },
+            meta: { auth: false, title: 'Home', icon: 'home' },
+            props: { default: false, header: true },
+        },
         {
             path: '/:pathMatch(.*)',
-            redirect: 'superchart',
+            redirect: 'home',
             name: 'NotFound',
             components: {
                 header: appHeader,

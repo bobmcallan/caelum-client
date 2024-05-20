@@ -82,6 +82,7 @@ const FgGreen = "\x1b[32m"
 const FgMagenta = "\x1b[35m"
 
 var _date = new Date();
+var _year = _date.getFullYear().toString().substr(-2);
 var _month = _date.getMonth() + 1;
 var _day = _date.getDate();
 
@@ -92,7 +93,7 @@ console.log("%s[config] %sMODE: %s", FgMagenta, Reset, mode)
 const version = (mode == 'development') ?
     versiony
         .from("package.json")
-        .major(2)
+        .major(_year)
         .minor(_month)
         .patch(_day)
         .to("package.json")
@@ -173,16 +174,8 @@ export default defineConfig({
                     vuerouter: ['vue-router'],
                 }
             },
-            // external: ['workers']
         }
     },
-    // css: {
-    //     preprocessorOptions: {
-    //         scss: {
-    //             additionalData: `@use "./src/styles/index.scss" as *;`,
-    //         },
-    //     },
-    // },
     plugins: [
         vue(),
         banner_plugin(__package.banner),

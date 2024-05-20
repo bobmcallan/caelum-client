@@ -3,8 +3,6 @@
 
         <el-card class="footer box-card" shadow="never">
 
-            <p class="pb-2"> OneDigital Pty Ltd </p>
-
             <sub class="text-gray font-100 pb-1">version: {{ version }} | client: {{ mode }} | vue: {{ vueversion }}</sub>
 
         </el-card>

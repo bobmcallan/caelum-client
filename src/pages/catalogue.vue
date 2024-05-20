@@ -7,6 +7,12 @@
 
             <div class="level-left">
 
+                <el-space>
+
+                Menu
+
+                </el-space>
+
             </div>
 
             <div class="level-right">
@@ -25,12 +31,13 @@
 
     </section>
 
-    Home Page 
+    <hr class="is-half" />
+
+Catalogue
 
     <hr class="is-spacer" />
 
     <insectum />
-
 </template>
 
 <script setup>
@@ -58,12 +65,12 @@
 
     const { activeIndex  } = storeToRefs(nuncstore)
 
-    // const props = defineProps({
-    //     index: {
-    //         type: [String, Number],
-    //         default: "home",
-    //     }
-    // })
+    const props = defineProps({
+        index: {
+            type: [String, Number],
+            default: "astronomy",
+        }
+    })
 
     // insectumstore.add([], __name)
 

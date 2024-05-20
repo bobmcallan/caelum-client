@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "src"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.cwd": "C:\\development\\caelum-client",
+    }
+}
