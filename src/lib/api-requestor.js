@@ -5,9 +5,10 @@ import frisbee from 'frisbee';
 import { nanoid } from 'nanoid'
 
 import { newlogger } from '@t3b/lib/vue/vue-logger';
-// import { authStore } from "@t3b/lib/stores/app-auth";
 
-const logger = newlogger({ name: "accountsCntrl", level: ENV.LOGLEVEL });
+const logger = newlogger({ name: "api-requestor", level: ENV.LOGLEVEL });
+logger.debug('Loading..');
+
 const __baseurl = lib.removeTrailingSlash(lib.DEFAULTAPIURL)
 const __api = new frisbee({ baseURI: __baseurl })
 const __devdelay = (ENV.DEVDELAY) ? ENV.DEVDELAY : -1;

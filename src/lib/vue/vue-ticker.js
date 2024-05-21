@@ -7,7 +7,8 @@ import { newlogger } from '@t3b/lib/vue/vue-logger';
 
 import { emitter } from './vue-emitter';
 
-const logger = newlogger({ name: "ticker", level: 'debug' });
+const logger = newlogger({ name: 'vue-ticker', level: ENV.LOGLEVEL });
+logger.debug('Loading..');
 
 var DEFAULTEVENT = {
     id: '',

@@ -2,9 +2,11 @@
 // Internal Plugins
 // ****************************************************************
 import * as ENV from '@t3b/app.config';
-import Logger, { newlogger } from './vue-logger';
+import { newlogger } from './vue-logger';
 
-import Events from './vue-events';
+const logger = newlogger({ name: "vue-initialise", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+logger.debug('Loading..');
+
 import Configuration from './vue-configuration';
 
 // ****************************************************************

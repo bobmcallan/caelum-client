@@ -5,8 +5,8 @@ import { computed } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import { Mutex } from 'async-mutex';
 
-const __name = "router-functions"
-const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
+const logger = newlogger({ name: "vue-router-functions", level: (ENV.DEBUG) ? 'debug' : 'warn' });
+logger.debug('Loading..');
 
 export default function routerFunctions() {
 

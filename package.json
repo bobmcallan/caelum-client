@@ -2,7 +2,7 @@
   "name": "vite-vue-caelum-clinet",
   "title": "Caelum",
   "private": true,
-  "version": "24.5.20",
+  "version": "24.5.21",
   "banner": "The 3rd Bob (c) 2023",
   "type": "module",
   "scripts": {

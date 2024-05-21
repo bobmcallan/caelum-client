@@ -4,9 +4,8 @@ import { eventStore } from "@t3b/lib/stores/app-events";
 
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-export let _Vue;
-
 const logger = newlogger({ name: "events-plugin", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+logger.debug('Loading..');
 
 const plugin = {
 

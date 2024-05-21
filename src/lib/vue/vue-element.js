@@ -2,6 +2,9 @@ import * as ENV from '@t3b/app.config';
 
 import { newlogger } from './vue-logger';
 
+const logger = newlogger({ name: "vue-element", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+logger.debug('Loading..');
+
 import '@t3b/styles/index.scss'
 
 import {

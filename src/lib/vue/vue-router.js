@@ -8,8 +8,7 @@ import appHeader from '@t3b/components/layout/app_header.vue';
 import appFooter from '@t3b/components/layout/app_footer.vue';
 
 const logger = newlogger({ name: 'vue-router', level: ENV.LOGLEVEL });
-
-logger.info('Loading..');
+logger.debug('Loading..');
 
 const defaultTemplate = { template: '<section class="container">{{ $route.path }}</section>' };
 

@@ -1,7 +1,8 @@
 import * as ENV from '@t3b/app.config';
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-const logger = newlogger({ name: "common", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+const logger = newlogger({ name: "api-common", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+logger.debug('Loading..');
 
 // export const DEFAULTAPIURL = `${location.protocol}//${location.hostname}:${location.port}/api` : 
 export const DEFAULTAPIURL = `${import.meta.env.VITE_API_PROTOCOL ?? location.protocol}//${import.meta.env.VITE_API_HOSTNAME ?? location.hostname}:${import.meta.env.VITE_API_PORT ?? location.port}/${import.meta.env.VITE_API_PATH ?? 'api'}`

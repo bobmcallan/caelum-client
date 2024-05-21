@@ -3,9 +3,8 @@ import * as ENV from '@t3b/app.config';
 import { configStore } from "@t3b/lib/stores/app-config";
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-export let _Vue;
-
-const logger = newlogger({ name: "config-plugin", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+const logger = newlogger({ name: "vue-configuration", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
+logger.debug('Loading..');
 
 const plugin = {
     name: 'vue-config',
