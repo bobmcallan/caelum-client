@@ -148,7 +148,7 @@ export default defineConfig({
                 target: {
                     protocol: 'http:',
                     host: 'localhost',
-                    port: 8080,
+                    port: 4000,
                 },
                 // rewrite: (path) => {
                 //     console.log(path)
