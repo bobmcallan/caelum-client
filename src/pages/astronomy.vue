@@ -9,7 +9,7 @@
 
                 <el-space>
 
-                Menu
+                    Menu
 
                 </el-space>
 
@@ -33,72 +33,72 @@
 
     <hr class="is-half" />
 
-Goes HERE!!
+    Goes HERE!!
 
     <hr class="is-spacer" />
 
     <insectum />
+
 </template>
 
 <script setup>
 
-    import * as ENV from '@t3b/app.config';
-    import { computed, ref, watch, nextTick, onMounted } from "vue";
-    import { storeToRefs } from 'pinia'
+import * as ENV from '@t3b/app.config';
+import { computed, ref, watch, nextTick, onMounted } from "vue";
+import { storeToRefs } from 'pinia'
 
-    import routerFunctions from "@t3b/lib/vue/vue-router-functions";
-    import * as functions from '@t3b/lib/functions/func-general';
-    import * as common from '@t3b/pages/common';
+import * as functions from '@t3b/lib/functions/func-general';
+import * as common from '@t3b/pages/common';
 
-    import emitter from '@t3b/lib/vue/vue-emitter';
+import emitter from '@t3b/lib/vue/vue-emitter';
 
-    import { insectumStore } from "@t3b/lib/stores/app-insectum";
-    import { nuncStore } from "@t3b/lib/stores/app-nunc";
+import { apodStore } from "@t3b/lib/stores/data-apod";
+import { insectumStore } from "@t3b/lib/stores/app-insectum";
 
-    import { newlogger } from '@t3b/lib/vue/vue-logger';
+import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-    const __name = "indexCntrl"
-    const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
+// Component and Logger
+const __name = "astronomyCntrl"
+const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
-    const insectumstore = insectumStore();
-    const nuncstore = nuncStore();
+// Stores
+const apodstore = apodStore();
+const insectumstore = insectumStore();
 
-    const { activeIndex  } = storeToRefs(nuncstore)
+// Refs
+// const { activeIndex } = storeToRefs(apodstore)
 
-    const props = defineProps({
-        index: {
-            type: [String, Number],
-            default: "astronomy",
-        }
-    })
+const initalise = async (rebuild = false) => {
 
-    // insectumstore.add([], __name)
+    logger.trace('[initalise] start');
 
-    const initalise = async (rebuild = false) => {
+    await Promise.all([
+        // factstore.initalise(),
+    ])
 
-        logger.trace('[initalise] start');
+    logger.trace('[initalise] end');
 
-        await Promise.all([
-            // factstore.initalise(),
-        ])
+}
 
-        logger.trace('[initalise] end');
+const refresh = async () => {
 
-    }
+    await initalise(true);
 
-    const refresh = async () => {
+    emitter.$emit('refresh', true)
 
-        await initalise(true);
+}
 
-        emitter.$emit('refresh', true)
+emitter.$on('refresh', () => {
 
-    }
+    refresh();
 
-    emitter.$on('refresh', () => {
+})
 
-        refresh();
-
-    })
+insectumstore.add([
+    // { title: 'selectedChart', data: () => selectedChart.value },
+    // { title: 'savedCharts', data: () => savedCharts.value },
+    // { title: 'selectedMeasures', data: () => selectedMeasures.value },
+], __name)
 
 </script>
 

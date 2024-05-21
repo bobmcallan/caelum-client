@@ -25,7 +25,7 @@
 
     </section>
 
-    Home Page 
+    Home Page
 
     <hr class="is-spacer" />
 
@@ -35,63 +35,54 @@
 
 <script setup>
 
-    import * as ENV from '@t3b/app.config';
-    import { computed, ref, watch, nextTick, onMounted } from "vue";
-    import { storeToRefs } from 'pinia'
+import * as ENV from '@t3b/app.config';
+import { computed, ref, watch, nextTick, onMounted } from "vue";
+import { storeToRefs } from 'pinia'
 
-    import routerFunctions from "@t3b/lib/vue/vue-router-functions";
-    import * as functions from '@t3b/lib/functions/func-general';
-    import * as common from '@t3b/pages/common';
+import routerFunctions from "@t3b/lib/vue/vue-router-functions";
+import * as functions from '@t3b/lib/functions/func-general';
+import * as common from '@t3b/pages/common';
 
-    import emitter from '@t3b/lib/vue/vue-emitter';
+import emitter from '@t3b/lib/vue/vue-emitter';
 
-    import { insectumStore } from "@t3b/lib/stores/app-insectum";
-    import { nuncStore } from "@t3b/lib/stores/app-nunc";
+import { insectumStore } from "@t3b/lib/stores/app-insectum";
+import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-    import { newlogger } from '@t3b/lib/vue/vue-logger';
+// Compoent and Logging
+const __name = "indexCntrl"
+const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
-    const __name = "indexCntrl"
-    const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
+// Stores
+const insectumstore = insectumStore();
 
-    const insectumstore = insectumStore();
-    const nuncstore = nuncStore();
+// Refs
+// const { activeIndex  } = storeToRefs(nuncstore)
 
-    const { activeIndex  } = storeToRefs(nuncstore)
+const initalise = async (rebuild = false) => {
 
-    // const props = defineProps({
-    //     index: {
-    //         type: [String, Number],
-    //         default: "home",
-    //     }
-    // })
+    logger.trace('[initalise] start');
 
-    // insectumstore.add([], __name)
+    await Promise.all([
+        // factstore.initalise(),
+    ])
 
-    const initalise = async (rebuild = false) => {
+    logger.trace('[initalise] end');
 
-        logger.trace('[initalise] start');
+}
 
-        await Promise.all([
-            // factstore.initalise(),
-        ])
+const refresh = async () => {
 
-        logger.trace('[initalise] end');
+    await initalise(true);
 
-    }
+    emitter.$emit('refresh', true)
 
-    const refresh = async () => {
+}
 
-        await initalise(true);
+emitter.$on('refresh', () => {
 
-        emitter.$emit('refresh', true)
+    refresh();
 
-    }
-
-    emitter.$on('refresh', () => {
-
-        refresh();
-
-    })
+})
 
 </script>
 

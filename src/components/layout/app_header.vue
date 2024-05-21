@@ -51,7 +51,6 @@ import { useRouter } from 'vue-router'
 
 import routerFunctions from "@t3b/lib/vue/vue-router-functions";
 import { insectumStore } from "@t3b/lib/stores/app-insectum";
-import { nuncStore } from "@t3b/lib/stores/app-nunc";
 import { apodStore } from "@t3b/lib/stores/data-apod";
 
 import emitter from '@t3b/lib/vue/vue-emitter';
@@ -59,19 +58,20 @@ import { newlogger } from '@t3b/lib/vue/vue-logger';
 
 import { toJson, paramsToObject, objectToParams } from '@t3b/lib/functions/func-general';
 
+// Compoent and Logging
 const _name = "page-headerCntrl"
 const _logger = newlogger({ name: _name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
+// Router
 const router = useRouter();
 const routerfunctions = routerFunctions();
 
+// Stores
 const insectumstore = insectumStore();
-const nuncstore = nuncStore();
-
 const apodstore = apodStore();
 
+// Refs
 const isloading = computed(() => false)
-
 const activePageIndex = ref()
 
 const props = defineProps({

@@ -11,7 +11,7 @@ import { createPinia } from 'pinia';
 
 // Router and Stores
 import { configStore } from './app-config.js';
-import { nuncStore } from "@t3b/lib/stores/app-nunc";
+import { apodStore } from "@t3b/lib/stores/data-apod";
 
 // ****************************************************************
 // Install
@@ -32,10 +32,10 @@ export default async function installPlugins(app) {
     await config.initalise();
     logger.debug('Initialised configStore');
 
-    // Install nuncStore
-    const nuncstore = nuncStore();
-    await nuncstore.initalise();
-    logger.debug('Initialised nuncStore');
+    // Install Apod
+    const apodstore = apodStore();
+    await apodstore.initalise();
+    logger.debug('Initialised apodStore');
 
     // Inject stores into all stores
     pinia.use(() => (
