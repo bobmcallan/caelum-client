@@ -1,17 +1,9 @@
 <template>
-    <section>
-
-        <hr class="is-half" />
+    <el-main>
 
         <nav class="level">
 
             <div class="level-left">
-
-                <el-space>
-
-                    Menu
-
-                </el-space>
 
             </div>
 
@@ -29,11 +21,9 @@
 
         </nav>
 
-    </section>
+        <h2 class="text-center">Catalogue</h2>
 
-    <hr class="is-half" />
-
-    Catalogue
+    </el-main>
 
     <hr class="is-spacer" />
 

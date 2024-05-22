@@ -150,12 +150,12 @@ export default defineConfig({
                     host: 'localhost',
                     port: 4000,
                 },
-                // rewrite: (path) => {
-                //     console.log(path)
-                //     const output = path.replace(/^\/api/, '')
-                //     console.log(output)
-                //     return output
-                // }
+                rewrite: (path) => {
+                    // console.log(path)
+                    const output = path.replace(/^\/api/, '')
+                    // console.log(output)
+                    return output
+                }
             },
         }
     },

@@ -1,7 +1,4 @@
-// Application Constants
-
 import { nanoid } from 'nanoid'
-
 
 export const DEBUG = (import.meta.env.MODE === "development")
 export const LOGLEVEL = (DEBUG) ? 'debug' : 'warn'
@@ -34,3 +31,20 @@ export const COLLECTORUPDATED = nanoid(10);
 export const PROJECTCREATED = nanoid(10);
 export const PROJECTUPDATED = nanoid(10);
 
+export const DEFAULTHEADERS = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+};
+
+// Auth Header Constants
+export const AUTH_KEY = "Authorization"
+export const CLIENT_KEY = "x-client-key"
+export const CLIENT_ACTION_KEY = "x-client-action"
+export const CLIENT_REQUEST_ID = "x-client-requestid"
+export const CLIENT_ENV_KEY = "x-client-env"
+export const CLIENT_FUNCTION = "x-client-function"
+
+// export const DEFAULTAPIURL = `${location.protocol}//${location.hostname}:${location.port}/api` : 
+export const DEFAULTAPIURL = `${import.meta.env.VITE_API_PROTOCOL ?? location.protocol}//${import.meta.env.VITE_API_HOSTNAME ?? location.hostname}:${import.meta.env.VITE_API_PORT ?? location.port}/${import.meta.env.VITE_API_PATH ?? 'api'}`

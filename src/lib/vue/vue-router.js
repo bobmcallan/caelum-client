@@ -33,7 +33,7 @@ const app_router = {
             name: 'astronomy',
             components: {
                 header: appHeader,
-                default: () => import('@t3b/pages/astronomy.vue'),
+                default: () => import('@t3b/pages/astronomy/index.vue'),
                 footer: appFooter
             },
             meta: { auth: false, title: 'Home', icon: 'home' },

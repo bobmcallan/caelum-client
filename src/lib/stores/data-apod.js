@@ -12,22 +12,23 @@ import emitter from '@t3b/lib/vue/vue-emitter';
 import { configStore } from "@t3b/lib/stores/app-config";
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
+import { toJson } from '@t3b/lib/functions/func-general';
 import '@t3b/lib/functions/func-array';
 import '@t3b/lib/functions/func-string';
 
 export const apodStore = defineStore("data-apodstore", () => {
 
+    // Comp and Logging 
     const _componentId = "data-apodstore"
+    const _logger = newlogger({ name: _componentId, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
     const mutex = new Mutex();
     const nanoid = customAlphabet(urlAlphabet, 5)
 
+    // Stores
     const configstore = configStore();
-    const _host = configstore.apiAddress
-    const _path = "apod"
 
-    const _logger = newlogger({ name: _componentId, level: (ENV.DEBUG) ? 'debug' : 'warn' });
-
+    // Refs & Constants
     const defaultApod = {
         id: null,
         date: null,
@@ -39,17 +40,39 @@ export const apodStore = defineStore("data-apodstore", () => {
         url: null
     }
 
+
     const _loading = ref(false)
+    const _apipath = configstore.apiAddress
+    const _path = "apod"
     const _db = ref(null)
     const _dbName = 'nasa'
     const _dbStore = 'apod'
 
-    const initalised = ref(false)
+    const _apodData = ref(null)
 
+    const initalised = ref(false)
     const isLoading = computed(() => _loading.value)
+    const apodData = computed(() => (_.isEmpty(_apodData.value)) ? null : _apodData.value)
+
     const generateId = () => nanoid()
 
-    const createdb = () => {
+    const initalise = async (force = false) => {
+
+        if (!_db.value) {
+            _db.value = _createdb();
+        }
+
+        await _loaddata(force);
+
+        getLatest()
+
+        emitter.$emit('apod-updated')
+
+        _logger.trace('[initalise] complete');
+
+    }
+
+    const _createdb = () => {
 
         const db = new Dexie(_dbName);
 
@@ -59,41 +82,17 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     }
 
-    const initalise = async (force = false) => {
-
-        if (!_db.value) {
-            _db.value = createdb();
-        }
-
-        await _loaddata(force);
-
-        emitter.$emit('apod-updated')
-
-        _logger.debug('[initalise] complete');
-
-    }
-
-    // const initalise = async (force = false) => {
-
-    //     await _getAPOD(force);
-
-    //     emitter.$emit('apod-updated')
-
-    //     _logger.debug('[initalise] complete');
-
-    // }
-
     const _loaddata = async (force = false) => {
 
         _logger.trace('[_getAPOD] awaiting RELEASE');
 
         const release = await mutex.acquire();
 
-        _logger.debug('[_getAPOD] start force:%s', force);
+        _logger.trace('[_getAPOD] start force:%s', force);
 
         if (initalised.value && !force) {
 
-            _logger.debug('[_loaddata] data IS loaded/initalised -> RETURN (initalised:%s force:%s)', initalised.value, force);
+            _logger.trace('[_loaddata] data IS loaded/initalised -> RETURN (initalised:%s force:%s)', initalised.value, force);
 
             release()
 
@@ -104,26 +103,29 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             _loading.value = true;
 
-            _logger.debug('[_getAPOD] loading...');
+            _logger.trace('[_getAPOD] loading...');
 
-            _logger.debug('[_getAPOD] _filenames:%s', _filenames.join(','));
+            _logger.trace('[_getAPOD] _apipath:%s _path:%s', _apipath, _path);
 
-            const url = new URL(_path, _host);
+            const _url = new URL(_apipath);
+            _url.pathname = `${_url.pathname}/${_path}`
 
-            _logger.debug('[_getAPOD] url -> %s', url.toString());
+            _logger.trace('[_getAPOD] url -> %s', _url.toString());
 
-            const response = await fetch(url.toString());
+            const response = await fetch(_url.toString());
 
             const contentType = response.headers.get("Content-Type")
 
-            if (!response.ok || contentType != 'application/json') {
+            _logger.trace('[_getAPOD] contentType -> %s', contentType);
+
+            if (!response.ok || !contentType.includes('application/json')) {
                 _logger.warn('[_getAPOD] source is empty');
                 return []
             }
 
             const data = await response.json()
 
-            _logger.debug('[_loaddata] data:%s', toJson(data));
+            _logger.trace('[_loaddata] data:%s', toJson(data));
 
             await _updateDataStore(data);
 
@@ -163,13 +165,12 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             _loading.value = true;
 
-            const input = source.map(x => {
+            const input = _.castArray(source).map(x => {
 
                 return {
-                    id: (!x.id) ? generateId() : x.id,
-                    name: (!x.title) ? DateTime.now().toMillis() : x.title,
-                    timestamp: DateTime.now().toMillis(),
-                    value: JSON.stringify(x.value)
+                    id: (!x.title) ? generateId() : x.title,
+                    timestamp: (!x.date) ? DateTime.now().toFormat('yyyy-mm-dd') : x.date,
+                    value: JSON.stringify(x)
                 }
 
             })
@@ -228,9 +229,9 @@ export const apodStore = defineStore("data-apodstore", () => {
                 throw "No Data"
             }
 
-            _logger.trace("[getLatest] output:%s", toJson(output))
+            // _logger.trace("[getLatest] output:%s", toJson(output))
 
-            return _transform(output)
+            _apodData.value = _transform(output)
 
         }
         catch (err) {
@@ -253,15 +254,15 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     const _transform = (input) => {
 
-        const defaultOutput = { id: null, name: null, timestamp: null, value: null, ...defaultChart }
+        const defaultOutput = { id: null, timestamp: null, value: null, ...defaultApod }
         if (!input || input == null) {
             return defaultOutput
         }
 
         const _input = { ...defaultOutput, ...input }
-        const _value = _.omit(JSON.parse(_input.value), ['id', 'name', 'timestamp'])
+        const _value = _.omit(JSON.parse(_input.value), ['id', 'timestamp'])
 
-        const output = { id: _input.id, name: _input.name, timestamp: _input.timestamp, ..._value };
+        const output = { id: _input.id, timestamp: _input.timestamp, ..._value };
 
         _logger.trace('[_transformChart] input:\n%s', toJson(input));
         _logger.trace('[_transformChart] _input:\n%s', toJson(_input));
@@ -271,6 +272,6 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     }
 
-    return { isLoading, initalised, initalise, getLatest }
+    return { isLoading, initalised, apodData, initalise, getLatest }
 
 });

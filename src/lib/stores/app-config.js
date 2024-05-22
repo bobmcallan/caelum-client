@@ -1,21 +1,11 @@
 import * as ENV from '@t3b/app.config';
-import { DEFAULTAPIURL } from '@t3b/lib/api-common';
+import { DEFAULTAPIURL } from '@t3b/app.config';
 
 import { version } from 'vue'
 import { defineStore } from 'pinia'
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
-
 const logger = newlogger({ name: "configStore", level: (ENV.DEBUG) ? ENV.LOGLEVEL : 'warn' });
-
-const __DEFAULT_CONFIG = {
-    scope: "",
-    name: "",
-    version: "",
-    support: "",
-    url: "",
-    loglevel: "",
-}
 
 export const configStore = defineStore({
 
@@ -27,9 +17,6 @@ export const configStore = defineStore({
 
         loading: false,
         initalised: false,
-
-        // __api: new requestor()
-
 
     }),
 
@@ -66,6 +53,8 @@ export const configStore = defineStore({
             this.environment.set("DEBUG", (import.meta.env.MODE === "development"));
             this.environment.set("CLIENTMODE", import.meta.env.MODE);
 
+            this.environment.set("APIURL", DEFAULTAPIURL);
+
             this.initalised = true
 
             logger.debug("[initalise] complete")
@@ -90,32 +79,6 @@ export const configStore = defineStore({
             return Array.from(this.environment, ([name, value]) => ({ name, value }));
 
         },
-
-        // async __process(request = {}) {
-
-        //     try {
-
-        //         this.loading = true;
-
-        //         let response = Object.assign({}, { result: __DEFAULT_CONFIG }, await this.__api.request(request))
-
-        //         this.$patch(response.result)
-
-        //     }
-        //     catch (err) {
-
-        //         console.log(err)
-
-        //         logger.warn('[__process] error %s', JSON.stringify(err, null, 2));
-
-        //     } finally {
-
-        //         this.loading = false;
-
-        //         logger.info("[__process] complete")
-
-        //     }
-        // },
 
     }
 });

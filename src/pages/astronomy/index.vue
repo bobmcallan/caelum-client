@@ -1,17 +1,10 @@
 <template>
-    <section>
 
-        <hr class="is-half" />
+    <el-main>
 
         <nav class="level">
 
             <div class="level-left">
-
-                <el-space>
-
-                    Menu
-
-                </el-space>
 
             </div>
 
@@ -29,11 +22,35 @@
 
         </nav>
 
-    </section>
+        <h2 class="text-center">Astronomy Picture of the Day</h2>
 
-    <hr class="is-half" />
+        <hr class="is-underline" />
 
-    Goes HERE!!
+        <el-form :model="apodData" label-width="auto" label-position="left">
+
+            <el-form-item label="Title:">
+                {{ apodData.title }}
+            </el-form-item>
+
+            <el-form-item label="Description:">
+                {{ apodData.explanation }}
+            </el-form-item>
+
+            <el-form-item label="Date:">
+                {{ apodData.date }}
+            </el-form-item>
+
+            <el-form-item label="Image:">
+                <el-image :src="apodData.url" fit="scale-down" />
+            </el-form-item>
+
+            <!-- <el-form-item label="Image:">
+            <el-image :src="apodData.hdUrl" fit="scale-down" />
+        </el-form-item> -->
+
+        </el-form>
+
+    </el-main>
 
     <hr class="is-spacer" />
 
@@ -44,7 +61,7 @@
 <script setup>
 
 import * as ENV from '@t3b/app.config';
-import { computed, ref, watch, nextTick, onMounted } from "vue";
+import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { storeToRefs } from 'pinia'
 
 import * as functions from '@t3b/lib/functions/func-general';
@@ -66,19 +83,8 @@ const apodstore = apodStore();
 const insectumstore = insectumStore();
 
 // Refs
-// const { activeIndex } = storeToRefs(apodstore)
-
-const initalise = async (rebuild = false) => {
-
-    logger.trace('[initalise] start');
-
-    await Promise.all([
-        // factstore.initalise(),
-    ])
-
-    logger.trace('[initalise] end');
-
-}
+const { apodData } = storeToRefs(apodstore)
+const form = ref({ name: null })
 
 const refresh = async () => {
 
@@ -94,16 +100,20 @@ emitter.$on('refresh', () => {
 
 })
 
+onBeforeUnmount(() => {
+
+    insectumstore.remove(__name)
+
+})
+
 insectumstore.add([
-    // { title: 'selectedChart', data: () => selectedChart.value },
-    // { title: 'savedCharts', data: () => savedCharts.value },
-    // { title: 'selectedMeasures', data: () => selectedMeasures.value },
+    { title: 'apodData', data: () => apodData.value },
 ], __name)
 
 </script>
 
 <style lang="scss">
-@import './common.scss';
+@import '../common.scss';
 
 .flex-grow {
     flex-grow: 1;

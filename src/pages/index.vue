@@ -1,7 +1,5 @@
 <template>
-    <section>
-
-        <hr class="is-half" />
+    <el-main>
 
         <nav class="level">
 
@@ -23,9 +21,9 @@
 
         </nav>
 
-    </section>
+        <h2 class="text-center">Home Page</h2>
 
-    Home Page
+    </el-main>
 
     <hr class="is-spacer" />
 

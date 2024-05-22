@@ -1,25 +1,30 @@
 <template>
-    <section>
+    <el-footer>
 
-        <el-card class="footer box-card" shadow="never">
+        <el-card class="footer box-card text-gray font-100 text-center" shadow="never">
 
-            <sub class="text-gray font-100 pb-1">version: {{ version }} | client: {{ mode }} | vue: {{ vueversion }}</sub>
+            <el-space spacer="|">
+                <sub>version: {{ version }}</sub>
+                <sub>client: {{ mode }} </sub>
+                <sub>vue: {{ vueversion }}</sub>
+                <sub>api: {{ apiurl }}</sub>
+            </el-space>
 
         </el-card>
 
         <hr class="is-spacer" />
 
-    </section>
+    </el-footer>
+
 </template>
 
 <script setup>
-    import { computed } from "vue";
-    import { newlogger } from '@t3b/lib/vue/vue-logger';
-    import { configStore } from "@t3b/lib/stores/app-config";
+import { computed } from "vue";
+import { configStore } from "@t3b/lib/stores/app-config";
 
-    const logger = newlogger({ name: 'userCntrl', level: 'debug' });
-    const config = configStore();
-    const mode = computed(() => config.getVariable("clientmode"))
-    const version = computed(() => config.getVariable("version"))
-    const vueversion = computed(() => config.getVariable("vue"))
+const config = configStore();
+const mode = computed(() => config.getVariable("clientmode"))
+const version = computed(() => config.getVariable("version"))
+const vueversion = computed(() => config.getVariable("vue"))
+const apiurl = computed(() => config.getVariable("apiurl"))
 </script>
