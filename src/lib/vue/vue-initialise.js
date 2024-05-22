@@ -28,11 +28,7 @@ export default async function installPlugins(app, stores) {
 
     if (!app) throw 'app not defined'
 
-    // Install Plugins
-    logger.debug('Installing plugins...');
-
     // Install Vue-Router
-    // const router = appRouter(stores.auth);
     const router = appRouter();
     app.use(router);
     logger.debug('Installed plugin:vue-router');

@@ -57,19 +57,7 @@ const initalise = async (rebuild = false) => {
 
     logger.trace('[initalise] start');
 
-    await Promise.all([
-        // factstore.initalise(),
-    ])
-
     logger.trace('[initalise] end');
-
-}
-
-const refresh = async () => {
-
-    await initalise(true);
-
-    emitter.$emit('refresh', true)
 
 }
 

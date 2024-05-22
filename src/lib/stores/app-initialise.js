@@ -44,9 +44,5 @@ export default async function installPlugins(app) {
         }
     )); // !! Must end with ;, otherwise client error !!
 
-    // Install data plugin
-    // pinia.use(dataPlugin);
-
-    // return { "auth": auth, "config": config }
     return { "config": config }
 }

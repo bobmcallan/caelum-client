@@ -12,7 +12,7 @@
 
                 <el-space>
 
-                    <el-button @click="refresh()" size="small">
+                    <el-button @click.exact="refresh()" @click.ctrl.exact="refresh(true)" size="small">
                         <el-icon><i-carbon-renew /></el-icon>
                     </el-button>
 
@@ -26,7 +26,21 @@
 
         <hr class="is-underline" />
 
-        <el-form :model="apodData" label-width="auto" label-position="left">
+        <el-skeleton style="width: 240px" :loading="isLoading" animated>
+            <template #template>
+                <el-skeleton-item variant="image" style="width: 100%; height: 240px;" />
+                <div style="padding: 14px">
+                    <el-skeleton-item variant="h3" style="width: 100%;" />
+                    <div style="display: flex; align-items: center; justify-items: space-between; margin-top: 16px; height: 16px;">
+                        <el-skeleton-item variant="text" style="margin-right: 16px" />
+                        <el-skeleton-item variant="text" style="width: 30%" />
+                    </div>
+                </div>
+            </template>
+
+        </el-skeleton>
+
+        <el-form v-if="apodData" :model="apodData" label-width="auto" label-position="left">
 
             <el-form-item label="Title:">
                 {{ apodData.title }}
@@ -86,17 +100,27 @@ const insectumstore = insectumStore();
 const { apodData } = storeToRefs(apodstore)
 const form = ref({ name: null })
 
-const refresh = async () => {
+const isLoading = computed(() => _.isEmpty(apodData.value))
 
-    await initalise(true);
+const refresh = async (force = false) => {
 
-    emitter.$emit('refresh', true)
+    logger.debug('[refresh] start %s', force);
+
+    apodstore.getLatest(force);
+
+    logger.debug('[refresh] end');
 
 }
 
 emitter.$on('refresh', () => {
 
     refresh();
+
+})
+
+onMounted(() => {
+
+    apodstore.getLatest();
 
 })
 

@@ -62,11 +62,6 @@ export const apodStore = defineStore("data-apodstore", () => {
             _db.value = _createdb();
         }
 
-        // Load Data and 
-        _loaddata(force);
-
-        emitter.$emit('apod-updated');
-
         _logger.trace('[initalise] complete');
 
     }
@@ -83,15 +78,15 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     const _loaddata = async (force = false) => {
 
-        _logger.trace('[_getAPOD] awaiting RELEASE');
+        _logger.debug('[_loaddata] awaiting RELEASE');
 
         const release = await mutex.acquire();
 
-        _logger.trace('[_getAPOD] start force:%s', force);
+        _logger.trace('[_loaddata] start force:%s', force);
 
         if (initalised.value && !force) {
 
-            _logger.trace('[_loaddata] data IS loaded/initalised -> RETURN (initalised:%s force:%s)', initalised.value, force);
+            _logger.debug('[_loaddata] data IS loaded/initalised -> RETURN (initalised:%s force:%s)', initalised.value, force);
 
             release()
 
@@ -102,9 +97,9 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             _loading.value = true;
 
-            _logger.trace('[_getAPOD] loading...');
+            _logger.debug('[_loaddata] loading...');
 
-            _logger.trace('[_getAPOD] _apipath:%s _path:%s', _apipath, _path);
+            _logger.debug('[_loaddata] _apipath:%s _path:%s', _apipath, _path);
 
             const _url = new URL(_apipath);
 
@@ -116,7 +111,7 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             const contentType = response.headers.get("Content-Type")
 
-            _logger.trace('[_getAPOD] contentType -> %s', contentType);
+            _logger.trace('[_loaddata] contentType -> %s', contentType);
 
             if (!response.ok || !contentType.includes('application/json')) {
                 _logger.warn('[_getAPOD] source is empty');
@@ -208,31 +203,31 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     }
 
-    emitter.$on('apod-updated', () => {
-
-        getLatest();
-
-    })
-
-    const getLatest = async () => {
+    const getLatest = async (force = false) => {
 
         if (!_db.value || !_db.value.isOpen()) {
             _logger.warn('[getLatest] opening and loading database');
             await initalise();
         }
 
-        const release = await mutex.acquire();
-
-        _logger.trace("[getLatest] getting chart")
+        _logger.debug("[getLatest] start force:%s", force)
 
         try {
 
             _loading.value = true;
 
+            let cnt = await _db.value.table(_dbStore).count();
+            if (cnt <= 0 || force) {
+                _logger.debug("[getLatest] getting data form server cnt:%s", cnt)
+                _apodData.value = null;
+                await _loaddata();
+            }
+
             let output = await _db.value.table(_dbStore).orderBy('timestamp').reverse().first();
 
             if (!output || _.isEmpty(output)) {
-                _logger.warn("[getLatest] not data")
+                _logger.warn("[getLatest] no data")
+                _apodData.value = null;
                 return;
             }
 
@@ -251,9 +246,7 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             _loading.value = false;
 
-            release()
-
-            _logger.trace("[getLatest] complete loading:", _loading.value)
+            _logger.debug("[getLatest] complete loading:", _loading.value)
 
         }
 
