@@ -62,11 +62,10 @@ export const apodStore = defineStore("data-apodstore", () => {
             _db.value = _createdb();
         }
 
-        await _loaddata(force);
+        // Load Data and 
+        _loaddata(force);
 
-        getLatest()
-
-        emitter.$emit('apod-updated')
+        emitter.$emit('apod-updated');
 
         _logger.trace('[initalise] complete');
 
@@ -108,6 +107,7 @@ export const apodStore = defineStore("data-apodstore", () => {
             _logger.trace('[_getAPOD] _apipath:%s _path:%s', _apipath, _path);
 
             const _url = new URL(_apipath);
+
             _url.pathname = `${_url.pathname}/${_path}`
 
             _logger.trace('[_getAPOD] url -> %s', _url.toString());
@@ -208,6 +208,12 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     }
 
+    emitter.$on('apod-updated', () => {
+
+        getLatest();
+
+    })
+
     const getLatest = async () => {
 
         if (!_db.value || !_db.value.isOpen()) {
@@ -226,7 +232,8 @@ export const apodStore = defineStore("data-apodstore", () => {
             let output = await _db.value.table(_dbStore).orderBy('timestamp').reverse().first();
 
             if (!output || _.isEmpty(output)) {
-                throw "No Data"
+                _logger.warn("[getLatest] not data")
+                return;
             }
 
             // _logger.trace("[getLatest] output:%s", toJson(output))
