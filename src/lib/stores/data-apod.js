@@ -107,13 +107,17 @@ export const apodStore = defineStore("data-apodstore", () => {
 
             _logger.trace('[_getAPOD] url -> %s', _url.toString());
 
-            const response = await fetch(_url.toString());
+            const controller = new AbortController()
 
-            const contentType = response.headers.get("Content-Type")
+            const timeoutId = setTimeout(() => controller.abort(), 5000)
+
+            const response = await fetch(_url.toString(), { signal: controller.signal });
+
+            const contentType = response?.headers.get("Content-Type") ?? null
 
             _logger.trace('[_loaddata] contentType -> %s', contentType);
 
-            if (!response.ok || !contentType.includes('application/json')) {
+            if (!response || !contentType || !response.ok || !contentType.includes('application/json')) {
                 _logger.warn('[_getAPOD] source is empty');
                 return []
             }
