@@ -8,5 +8,6 @@ A SPA client for connecting to the (demo) backend (https://github.com/bobmcallan
 * Element Plus - https://element-plus.org/en-US/
 
 # ToDo
-1. Backend timer to get new APOD from server
-2. Web Socket for event based trigger when new APOD is available
+1. Unit Tests
+2. Backend timer to get new APOD from server
+3. Web Socket for event based trigger when new APOD is available

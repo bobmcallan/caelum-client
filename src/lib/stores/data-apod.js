@@ -56,7 +56,7 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     const generateId = () => nanoid()
 
-    const initalise = async (force = false) => {
+    const initalise = async () => {
 
         if (!_db.value) {
             _db.value = _createdb();
@@ -76,26 +76,19 @@ export const apodStore = defineStore("data-apodstore", () => {
 
     }
 
-    const _loaddata = async (force = false) => {
+    const _loaddata = async () => {
 
         _logger.debug('[_loaddata] awaiting RELEASE');
 
         const release = await mutex.acquire();
 
-        _logger.trace('[_loaddata] start force:%s', force);
-
-        if (initalised.value && !force) {
-
-            _logger.debug('[_loaddata] data IS loaded/initalised -> RETURN (initalised:%s force:%s)', initalised.value, force);
-
-            release()
-
-            return;
-        }
-
         try {
 
             _loading.value = true;
+
+            if (!_db.value) {
+                _db.value = _createdb();
+            }
 
             _logger.debug('[_loaddata] loading...');
 

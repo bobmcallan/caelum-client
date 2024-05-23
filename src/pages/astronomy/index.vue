@@ -104,7 +104,7 @@ const isLoading = computed(() => _.isEmpty(apodData.value))
 
 const refresh = async (force = false) => {
 
-    logger.debug('[refresh] start %s', force);
+    logger.debug('[refresh] start force:%s', force);
 
     apodstore.getLatest(force);
 
