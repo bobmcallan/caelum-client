@@ -9,88 +9,6 @@ import { toJson } from '@t3b/lib/functions/func-general';
 const _name = "common-js"
 const _logger = newlogger({ name: _name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
-const _divisionName = (value) => {
-    if (!value) return value;
-
-    switch (value.toLowerCase()) {
-        case 'onepass': return 'onepass'
-
-        case 'div-bunnings':
-        case 'bunnings':
-            return 'bunnings'
-
-        case 'div-catch':
-        case 'catch':
-            return 'catch'
-
-        case 'div-kmart':
-        case 'kmart':
-            return 'kmart'
-
-        case 'div-target':
-        case 'target':
-            return 'target'
-
-        case 'div-officeworks':
-        case 'officeworks':
-            return 'officeworks'
-
-        case 'all': return 'all'
-
-        default: return value
-    }
-}
-
-export const divisionName = (input) => {
-    if (!input) return input;
-    if (input.toLowerCase() === 'all') return 'All Divisions'
-    return _divisionName(input).titleCase()
-}
-
-export const divisionColor = (input) => {
-    if (!input) return input;
-    const name = _divisionName(input);
-    return namedColors[name]
-}
-
-export const purchaseTypeColor = (input) => {
-    if (!input) return input;
-    return namedColors[input.toLowerCase()]
-}
-
-export const purchaseTypeName = (input) => {
-    if (!input) return input;
-
-    switch (input.toLowerCase()) {
-        case 'online': return 'Online'
-        case 'instore': return 'Instore'
-        case 'click_and_collect': return 'C&C'
-        case 'all': return 'All Channels'
-        default: return input
-    }
-
-}
-
-export const cohortColor = (input) => {
-    if (!input) return input;
-    return namedColors[input.toLowerCase()]
-}
-
-export const cohortName = (value, short = false) => {
-
-    if (!value) return value;
-
-    switch (value.toLowerCase()) {
-        case 'onepass': return (short) ? 'OP' : 'OnePass'
-        case 'flybuys': return (short) ? 'FB' : 'Flybuys'
-        case 'flybuys_only': return (short) ? 'FB (ONLY)' : 'Flybuys Only'
-        case 'onepass_only': return (short) ? 'OP (ONLY)' : 'OnePass Only'
-        case 'onepass_and_flybuys': return (short) ? 'OP&FB' : 'OnePass & Flybuys'
-        case 'all': return (short) ? 'ALL' : 'All'
-        default: return value.capitalize();
-    }
-}
-
 export const segmentName = (value) => {
     // _logger.debug('[segmentName] value:%s', value);
 
@@ -114,69 +32,6 @@ export const scaleName = (value, short = false) => {
         case 'years': return (short) ? 'Y' : 'Years'
         default: return value.capitalize();
     }
-}
-
-export const measureName = (value, short = false) => {
-
-    if (!value) return value;
-
-    switch (value.toLowerCase()) {
-        case 'members': return (short) ? 'TXN MEM' : 'Transacting Members'
-
-        case 'transactions':
-        case 'transaction_cnt':
-            return (short) ? 'TXN' : 'Transactions'
-
-        case 'frequency':
-            return (short) ? 'FQN' : 'Frequency'
-
-        case 'basket':
-            return (short) ? 'BSK' : 'Basket'
-
-        case 'revenue':
-            return (short) ? 'REV' : 'Revenue'
-
-        case 'account-created':
-            return (short) ? 'ACC CRE' : value.capitalize()
-
-        case 'trial-commenced':
-            return (short) ? 'TRIAL CRE' : value.capitalize()
-
-        case 'trial-converted':
-            return (short) ? 'TRIAL CONV' : value.capitalize()
-
-        case 'direct-to-paid':
-            return (short) ? 'DIR PAID' : value.capitalize()
-
-        case 'signup-session':
-            return (short) ? 'SIGNUP SESS' : value.capitalize()
-
-        case 'signups_sum_instore':
-            return (short) ? 'SIGNUP-INSTORE' : 'Instore Signups'
-
-        case 'signups_sum_online':
-            return (short) ? 'SIGNUP-ONLINE' : 'Online Signups'
-
-        case 'gtv': return 'GTV'
-        case 'aov': return 'AOV'
-        case 'clv': return 'CLV'
-
-        default: return value.capitalize();
-    }
-}
-
-export const measureColor = (input) => {
-    if (!input) return input;
-    return namedColors[input.toLowerCase()]
-}
-
-export const measureRowClassName = (row, rowIndex) => {
-
-    if (row.row.measure_name) {
-        return `measure-row measure-name-${row.row.measure_name.toLowerCase()}`
-    }
-
-    return ''
 }
 
 export const segmentFromDate = (inputValue, scale = 'month', incrementValue = 0) => {
@@ -282,15 +137,6 @@ export const getDayMonth = (date) => {
     return new Intl.DateTimeFormat('en-US', options).format(date);
 
 }
-
-// export const countupArray = (startNumber, limit) => {
-//     const output = [];
-//     for (let i = (startNumber - limit); i <= (startNumber); i++) {
-//         output.push(i);
-//     }
-//     return output;
-// }
-
 export const calculateEMA = (data, period) => {
     const alpha = 2 / (period + 1);
     let ema = [];

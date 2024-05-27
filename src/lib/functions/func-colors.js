@@ -42,37 +42,9 @@ export const namedColors = {
     'black': '#000',
     'yellow': '#f1c40f',
     'all': '#000',
-    'onepass': '#9900f1',
-    'flybuys': '#007aff',
-    'bunnings': '#0d5257',
-    'kmart': '#1f77b4',
-    'target': '#CC0000',
-    'officeworks': '#001080',
-    'catch': '#f1c40f',
-    'transactions': '#1f77b4',
-    'transaction_cnt': '#1f77b4',
-    'transactions_per_signup': '#000',
-    'membership_total': '#9900f1',
-    'membership_active': '#9900f1',
-    'account_created': '#91cc75',
-    'total_signups': '#91cc75',
-    'direct_to_paid': '#9a60b4',
-    'trial_commenced': '#f1c40f',
-    'trial_converted': '#fc8452',
-    'resubscribed': '#73c0de',
     'revenue': '#DC143C',
-    'aov': '#DC143C',
-    'gtv': '#1f77b4',
-    'member_cnt': '#000',
-    'signups_sum_instore': '#000',
-    'signups_sum_online': '#000',
-    'online': '#1f77b4', // blue
-    'instore': '#DC143C', // red
-    'c&c': '#f1c40f', // yellow
 }
 export const defaultColors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4']
-// export const defaultColors = ['#5470c6', '#ee6666', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#91cc75', '#fac858', '#73c0de'];
-// export const defaultColors = ['#e60049', '#0bb4ff', '#50e991', '#e6d800', '#9b19f5', '#ffa300', '#dc0ab4', '#b3d4ff', '#00bfa0']
 
 export const randomColor = () => {
     return chroma.random().hex();
