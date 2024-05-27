@@ -33,7 +33,7 @@
 <script setup>
 
 import * as ENV from '@t3b/app.config';
-import { computed, ref, watch, nextTick, onMounted } from "vue";
+import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { storeToRefs } from 'pinia'
 
 import routerFunctions from "@t3b/lib/vue/vue-router-functions";
@@ -46,7 +46,7 @@ import { insectumStore } from "@t3b/lib/stores/app-insectum";
 import { newlogger } from '@t3b/lib/vue/vue-logger';
 
 // Compoent and Logging
-const __name = "indexCntrl"
+const __name = "catalogueCntrl"
 const logger = newlogger({ name: __name, level: (ENV.DEBUG) ? 'debug' : 'warn' });
 
 // Stores
@@ -67,10 +67,16 @@ emitter.$on('refresh', () => {
 
 })
 
+onBeforeUnmount(() => {
+
+    insectumstore.remove(__name)
+
+})
+
 </script>
 
 <style lang="scss">
-@import './common.scss';
+@import '../common.scss';
 
 .flex-grow {
     flex-grow: 1;

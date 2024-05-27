@@ -44,7 +44,7 @@ const app_router = {
             name: 'catalogue',
             components: {
                 header: appHeader,
-                default: () => import('@t3b/pages/catalogue.vue'),
+                default: () => import('@t3b/pages/catalogue/index.vue'),
                 footer: appFooter
             },
             meta: { auth: false, title: 'Home', icon: 'home' },
